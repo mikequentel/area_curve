@@ -18,14 +18,15 @@ def mkpolys(xa, xb, number_of_panels):
   poly_list = []
   for i in range(xa, xb, int(panel_width)):
     panel_midpoint = i + half_panel
-    poly = Rectangle((i, 0), (panel_width + i), 1/panel_midpoint, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
+    #panel_midpoint = i
+    #poly = Rectangle((i, 0), (panel_width + i), func(panel_midpoint), edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
+    poly = Rectangle((i, 0), panel_width, func(panel_midpoint), edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
     poly_list.append(poly)
-  #poly = Rectangle((poly_x_origin, 0), panel_width, 1/(poly_x_origin + (poly_x_origin/2)), color='y')
-  #poly = Rectangle((poly_x_origin, 0), panel_width, 1/xa, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
-  #return poly
   return poly_list
 
-
+def func(input_x):
+  y = 0.05 * input_x**2
+  return y
 
 def main():
   # rendering area
@@ -39,25 +40,13 @@ def main():
   # range
   #x = np.linspace(0, (2 * np.pi), 256,endpoint=True)
   x = np.linspace(-10, 10, 256, endpoint=True)
-  # formulas to graph
-#  sine = np.sin(x)
-#  cosine = np.cos(x)
-#  tangent = np.tan(x)
-#  cotangent = 1/np.tan(x)
-#  cosecant = 1/np.sin(x)
-#  secant = 1/np.cos(x)
-  
-  func = 1/x
+  # formula to graph
+  #func = 1/x
+  func_output = func(x)
+  func_label = "0.05x^2"
   
   # line styles and labels
-  #plot(x, sine, color="red", linewidth=2.5, linestyle="-",  label="sin")
-  #plot(x, cosine, color="blue", linewidth=2.5, linestyle="-",  label="cos")
-  #plot(x, tangent, color="orange", linewidth=2.5, linestyle="-", label="tan")
-  #plot(x, cotangent, color="purple", linewidth=2.5, linestyle="-", label="cot")
-  #plot(x, cosecant, color="green", linewidth=2.5, linestyle="-", label="csc")
-  #plot(x, secant, color="yellow", linewidth=2.5, linestyle="-", label="sec")
-  #plot(x, func, color="blue", linewidth=2.5, linestyle="-",  label="f(x) = 1/x")
-  plot(x, func, color="blue", linewidth=2.5, linestyle="-",  label="f(x) = 1/x")
+  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-",  label=func_label)
   
   # tick spines
   ax = gca()
@@ -84,14 +73,11 @@ def main():
   legend(loc='upper left')
   
   for label in ax.get_xticklabels() + ax.get_yticklabels():
-    #label.set_fontsize(16)
     label.set_fontsize(8)
-    #label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.65 ))
     label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.05))
     
   # Polys
-  #ax.add_patch(poly)
-  poly_list = mkpolys(1, 11, 10)
+  poly_list = mkpolys(1, 9, 4)
   for poly_item in poly_list:
     ax.add_patch(poly_item)
   
