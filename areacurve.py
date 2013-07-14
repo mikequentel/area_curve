@@ -16,13 +16,21 @@ def mkpolys(xa, xb, number_of_panels):
   #poly_x_origin -= (poly_x_origin/2.0)
   half_panel = panel_width/2.0
   poly_list = []
+  area = 0.0
+  poly_data = []
+  
   for i in range(xa, xb, int(panel_width)):
     panel_midpoint = i + half_panel
     #panel_midpoint = i
     #poly = Rectangle((i, 0), (panel_width + i), func(panel_midpoint), edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
-    poly = Rectangle((i, 0), panel_width, func(panel_midpoint), edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
+    panel_height = func(panel_midpoint)
+    poly = Rectangle((i, 0), panel_width, panel_height, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
     poly_list.append(poly)
-  return poly_list
+    area += (panel_width * panel_height)
+  
+  poly_data.append(poly_list)
+  poly_data.append(area)
+  return poly_data
 
 def func(input_x):
   y = 0.05 * input_x**2
@@ -77,10 +85,12 @@ def main():
     label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.05))
     
   # Polys
-  poly_list = mkpolys(1, 9, 4)
+  poly_data = mkpolys(1, 9, 4)
+  poly_list = poly_data[0]
+  total_area = poly_data[1]
   for poly_item in poly_list:
     ax.add_patch(poly_item)
-  
+  print "Total area: " + str(total_area)
   # display
   show()
 
