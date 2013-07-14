@@ -4,27 +4,15 @@ from pylab import *
 # makes area poly
 def mkpolys(xa, xb, number_of_panels):
   # area poly range
-  #xa = 1
-  #xb = 11
-  #area_poly_range = np.linspace(xa, xb, 256, endpoint=True)
   poly_range_dist = (xb - xa) * 1.0
-  #intervals = 10.0
-  #intervals = number_of_panels
-  #panel_width = poly_range_dist/intervals
-  panel_width = 1.0 * poly_range_dist/number_of_panels
-  #poly_x_origin = xa
-  #poly_x_origin -= (poly_x_origin/2.0)
+  panel_width = poly_range_dist/number_of_panels
   half_panel = panel_width/2.0
   poly_list = []
   area = 0.0
   poly_data = []
-  
-  #for i in range(xa, xb, int(panel_width)):
-  #for i in range(xa, xb):
+
   for i in np.arange(xa, xb, panel_width):
     panel_midpoint = i + half_panel
-    #panel_midpoint = i
-    #poly = Rectangle((i, 0), (panel_width + i), func(panel_midpoint), edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
     panel_height = func(panel_midpoint)
     poly = Rectangle((i, 0), panel_width, panel_height, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
     poly_list.append(poly)
@@ -49,14 +37,7 @@ def main():
   
   # range
   #x = np.linspace(0, (2 * np.pi), 256,endpoint=True)
-  x = np.linspace(-10, 10, 256, endpoint=True)
-  # formula to graph
-  #func = 1/x
-  func_output = func(x)
-  func_label = None
-  
-  # line styles and labels
-  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
+  x = np.linspace(-10.0, 10.0, 256, endpoint=True)
   
   # tick spines
   ax = gca()
@@ -86,13 +67,31 @@ def main():
     label.set_fontsize(8)
     label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.05))
     
+  
+    
   # Polys
-  poly_data = mkpolys(1, 9, 22)
+  start = 1
+  stop = 9
+  samples = 22
+  poly_data = mkpolys(start, stop, samples)
   poly_list = poly_data[0]
   total_area = poly_data[1]
   for poly_item in poly_list:
     ax.add_patch(poly_item)
-  print "Total area: " + str(total_area)
+  print "Area: " + str(total_area)
+  area_label = "Area under f(x): " + str(total_area)
+  
+  # formula to graph
+  #func = 1/x
+  func_output = func(x)
+  func_label = area_label + "\nPanels: " + str(samples)
+  
+  # legend
+  legend(loc='upper left')
+  
+  # line styles and labels
+  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
+    
   # display
   show()
 
