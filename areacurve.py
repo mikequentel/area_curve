@@ -86,12 +86,12 @@ def main():
   func_output = func(x)
   func_label = area_label + "\nPanels: " + str(samples)
   
+  # line styles and labels
+  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
+  
   # legend
   legend(loc='upper left')
   
-  # line styles and labels
-  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
-    
   # display
   show()
 
