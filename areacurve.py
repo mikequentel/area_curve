@@ -7,7 +7,7 @@ def mkpolys(xa, xb, number_of_panels):
   #xa = 1
   #xb = 11
   #area_poly_range = np.linspace(xa, xb, 256, endpoint=True)
-  poly_range_dist = xb - xa
+  poly_range_dist = (xb - xa) * 1.0
   #intervals = 10.0
   #intervals = number_of_panels
   #panel_width = poly_range_dist/intervals
@@ -19,8 +19,9 @@ def mkpolys(xa, xb, number_of_panels):
   area = 0.0
   poly_data = []
   
-  for i in range(xa, xb, int(panel_width)):
+  #for i in range(xa, xb, int(panel_width)):
   #for i in range(xa, xb):
+  for i in np.arange(xa, xb, panel_width):
     panel_midpoint = i + half_panel
     #panel_midpoint = i
     #poly = Rectangle((i, 0), (panel_width + i), func(panel_midpoint), edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
@@ -52,10 +53,10 @@ def main():
   # formula to graph
   #func = 1/x
   func_output = func(x)
-  func_label = "0.05x^2"
+  func_label = None
   
   # line styles and labels
-  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-",  label=func_label)
+  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
   
   # tick spines
   ax = gca()
@@ -86,7 +87,7 @@ def main():
     label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.05))
     
   # Polys
-  poly_data = mkpolys(1, 9, 4)
+  poly_data = mkpolys(1, 9, 22)
   poly_list = poly_data[0]
   total_area = poly_data[1]
   for poly_item in poly_list:
