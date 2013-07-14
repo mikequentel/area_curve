@@ -11,7 +11,7 @@ def mkpolys(xa, xb, number_of_panels):
   #intervals = 10.0
   #intervals = number_of_panels
   #panel_width = poly_range_dist/intervals
-  panel_width = poly_range_dist/number_of_panels
+  panel_width = 1.0 * poly_range_dist/number_of_panels
   #poly_x_origin = xa
   #poly_x_origin -= (poly_x_origin/2.0)
   half_panel = panel_width/2.0
@@ -20,6 +20,7 @@ def mkpolys(xa, xb, number_of_panels):
   poly_data = []
   
   for i in range(xa, xb, int(panel_width)):
+  #for i in range(xa, xb):
     panel_midpoint = i + half_panel
     #panel_midpoint = i
     #poly = Rectangle((i, 0), (panel_width + i), func(panel_midpoint), edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
