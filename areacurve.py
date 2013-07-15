@@ -1,5 +1,7 @@
 #!/usr/bin/python
 from pylab import *
+xa = 1
+xb = 10
 
 # makes area poly
 def mkpolys(xa, xb, number_of_panels):
@@ -71,7 +73,13 @@ def gui_setup():
   return s_panels
 
 def update(val, s=None):
+#  poly_data = mkpolys(xa, xb, val)
+#  poly_list = poly_data[0]
+#  total_area = poly_data[1]
+#  for poly_item in poly_list:
+#    gca().add_patch(poly_item)
   draw()
+
 
 #################### END GUI COMPONENTS ########################################
 
