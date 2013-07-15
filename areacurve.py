@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from pylab import *
-from matplotlib.widgets import Slider, Button
 
 # makes area poly
 def mkpolys(xa, xb, number_of_panels):
@@ -68,7 +67,7 @@ def gui_setup():
   slider_max = 100
   axcolor = 'white'
   panel_axis  = plt.axes([0.25, 0.15, 0.65, 0.03], axisbg=axcolor)
-  s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', increment=1)
+  s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='green', increment=1)
   return s_panels
 
 def update(val, s=None):
@@ -139,7 +138,7 @@ def main():
   func_label = area_label + "\nPanels: " + str(samples)
   
   # line styles and labels
-  plot(x, func_output, color="black", linewidth=2.5, linestyle="-", label=func_label)
+  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
   
   # legend
   legend(loc='upper left')
