@@ -5,6 +5,8 @@ xb = 10
 start = 1
 stop = 9
 samples = 22
+poly_data = []
+poly_list = []
 
 
 # makes area poly
@@ -27,6 +29,11 @@ def mkpolys(xa, xb, number_of_panels):
   poly_data.append(poly_list)
   poly_data.append(area)
   return poly_data
+
+def init(samples):
+  global poly_data
+  #poly_data = mkpolys(start, stop, samples)
+  poly_data = mkpolys(xa, xb, samples)
 
 def func(input_x):
   y = 0.05 * input_x ** 2
@@ -78,6 +85,12 @@ class DiscreteSlider(Slider):
 #  return s_panels
 
 def update(val, s=None):
+  global poly_data
+  if poly_data:
+    if len(poly_data) > 0:
+      poly_list = poly_data[0]
+      for poly_item in poly_list:
+        poly_item.remove()
   poly_data = mkpolys(xa, xb, val)
   poly_list = poly_data[0]
   total_area = poly_data[1]
@@ -88,6 +101,7 @@ def update(val, s=None):
 #  for poly_item in poly_list:
 #    gca().add_patch(poly_item)
   draw()
+  return poly_data
 
 
 
@@ -96,8 +110,8 @@ def update(val, s=None):
 #def main():
 
 # rendering area
-figure(figsize=(4,2.5), dpi=80)
-#figure(figsize=(8,5), dpi=80)
+#figure(figsize=(4,2.5), dpi=80)
+figure(figsize=(8,5), dpi=80)
 #figure(figsize=(18, 15), dpi=80)
 
 # display area to use; can be modified to accommodate more graphs
@@ -139,11 +153,11 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
   
 # Polys
 
-poly_data = mkpolys(start, stop, samples)
+poly_data = update(samples)
 poly_list = poly_data[0]
 total_area = poly_data[1]
-for poly_item in poly_list:
-  ax.add_patch(poly_item)
+#for poly_item in poly_list:
+#  ax.add_patch(poly_item)
 print "Area: " + str(total_area)
 area_label = "Area under f(x): " + str(total_area)
 
