@@ -96,10 +96,7 @@ def update(val, s=None):
   total_area = poly_data[1]
   for poly_item in poly_list:
     ax.add_patch(poly_item)
-#  poly_list = poly_data[0]
-#  total_area = poly_data[1]
-#  for poly_item in poly_list:
-#    gca().add_patch(poly_item)
+  print total_area
   draw()
   return poly_data
 
@@ -146,7 +143,7 @@ yticks(xy_range, y_tick_labels)
 legend(loc='upper left')
 
 for label in ax.get_xticklabels() + ax.get_yticklabels():
-  label.set_fontsize(8)
+  label.set_fontsize(9)
   label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.05))
   
 
@@ -154,17 +151,18 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
 # Polys
 
 poly_data = update(samples)
-poly_list = poly_data[0]
-total_area = poly_data[1]
+#poly_list = poly_data[0]
+#total_area = poly_data[1]
 #for poly_item in poly_list:
 #  ax.add_patch(poly_item)
-print "Area: " + str(total_area)
-area_label = "Area under f(x): " + str(total_area)
+#print "Area: " + str(total_area)
+#area_label = "Area under f(x): " + str(total_area)
 
 # formula to graph
 #func = 1/x
 func_output = func(x)
-func_label = area_label + "\nPanels: " + str(samples)
+#func_label = area_label + "\nPanels: " + str(samples)
+func_label = "func(x)"
 
 # line styles and labels
 plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
