@@ -26,6 +26,7 @@ def mkpolys(xa, xb, number_of_panels):
 
 def func(input_x):
   y = 0.05 * input_x ** 2
+  #y = (input_x - 3) * (input_x - 5) * (input_x - 7) + 85
   return y
 
 #################### START GUI COMPONENTS ######################################
