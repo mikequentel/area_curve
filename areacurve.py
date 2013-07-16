@@ -43,7 +43,7 @@ def func(input_x):
   #y = (input_x - 3) * (input_x - 5) * (input_x - 7) + 85
   return y
 
-#################### START GUI COMPONENTS ######################################
+#################### START GUI CONTROLS ######################################
 
 # Class DiscreteSlider from Joe Kington on Stackoverflow at thread:
 # http://stackoverflow.com/questions/13656387/can-i-make-matplotlib-sliders-more-discrete
@@ -56,8 +56,7 @@ class DiscreteSlider(Slider):
     #self.inc = kwargs.pop('increment', 0.5)
     self.inc = kwargs.pop('increment', 1)
     Slider.__init__(self, *args, **kwargs)
-  
-  
+
   def set_val(self, val):
     discrete_val = int(val / self.inc) * self.inc
     # We can't just call Slider.set_val(self, discrete_val), because this 
@@ -77,15 +76,8 @@ class DiscreteSlider(Slider):
       return
     for cid, func in self.observers.iteritems():
       func(discrete_val)
-      
-#def gui_setup():
-#  plt.subplots_adjust(left=0.25, bottom=0.25)
-#  slider_min = 1
-#  slider_max = 100
-#  axcolor = 'white'
-#  panel_axis  = plt.axes([0.25, 0.15, 0.65, 0.03], axisbg=axcolor)
-#  s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='green', increment=1)
-#  return s_panels
+
+#################### END GUI CONTROLS ########################################
 
 def update(val, s=None):
   global poly_data
@@ -111,12 +103,6 @@ def update(val, s=None):
   draw()
   return poly_data
 
-
-
-#################### END GUI COMPONENTS ########################################
-
-#def main():
-
 # rendering area
 #figure(figsize=(4,2.5), dpi=80)
 figure(figsize=(8,5), dpi=80)
@@ -126,7 +112,6 @@ figure(figsize=(8,5), dpi=80)
 subplot(111)
 
 # range
-#x = np.linspace(0, (2 * np.pi), 256,endpoint=True)
 x = np.linspace(-10.0, 10.0, 256, endpoint=True)
 
 # tick spines
@@ -153,18 +138,9 @@ yticks(xy_range, y_tick_labels)
 for label in ax.get_xticklabels() + ax.get_yticklabels():
   label.set_fontsize(9)
   label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.05))
-  
 
-  
 # Polys
-
 poly_data = update(samples)
-#poly_list = poly_data[0]
-#total_area = poly_data[1]
-#for poly_item in poly_list:
-#  ax.add_patch(poly_item)
-#print "Area: " + str(total_area)
-#area_label = "Area under f(x): " + str(total_area)
 
 # formula to graph
 #func = 1/x
@@ -185,22 +161,8 @@ slider_max = 100
 axcolor = 'white'
 panel_axis  = plt.axes([0.25, 0.05, 0.65, 0.03], axisbg=axcolor)
 s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='green', increment=1)
-#return s_panels
-#panels_slider = gui_setup()
-#panels_slider.on_changed(update)
-#panels_slider.set_val(samples)
-
 s_panels.on_changed(update)
 s_panels.set_val(samples)
 
-
-
 # display
 show()
-  
-  
-  
-## Specifies name of main function.
-#if __name__ == "__main__":
-#  sys.exit(main())
-    
