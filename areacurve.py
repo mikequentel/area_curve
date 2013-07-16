@@ -1,16 +1,18 @@
 #!/usr/bin/python
+from scipy import integrate
 from pylab import *
 xa = 1
 xb = 10
-start = 1
-stop = 9
 samples = 22
 poly_data = []
 poly_list = []
 area_text = None
+exact_area = 0.0
+exact_area_text = None
 
 # makes area poly
 def mkpolys(xa, xb, number_of_panels):
+  global exact_area
   # area poly range
   poly_range_dist = (xb - xa) * 1.0
   panel_width = poly_range_dist / number_of_panels
@@ -18,6 +20,7 @@ def mkpolys(xa, xb, number_of_panels):
   poly_list = []
   area = 0.0
   poly_data = []
+  exact_area = integrate.quad(lambda x: func(x), xa, xb)[0]
 
   for i in np.arange(xa, xb, panel_width):
     panel_midpoint = i + half_panel
@@ -86,6 +89,7 @@ class DiscreteSlider(Slider):
 
 def update(val, s=None):
   global poly_data
+  global exact_area_text
   global area_text
   if poly_data:
     if len(poly_data) > 0:
@@ -97,10 +101,13 @@ def update(val, s=None):
   total_area = poly_data[1]
   for poly_item in poly_list:
     ax.add_patch(poly_item)
-  print total_area
+  #print total_area
+  if exact_area_text is not None:
+    exact_area_text.remove()
   if area_text is not None:
     area_text.remove()
-  area_text = plt.text(2.0, 2.0, "Area: " + str(total_area))
+  exact_area_text = plt.text(2.0, 3.5, "Exact Area: " + str(exact_area))
+  area_text = plt.text(2.0, 2.0, "Riemann Sum Area: " + str(total_area))
   draw()
   return poly_data
 
@@ -142,9 +149,6 @@ for i in xy_range:
   y_tick_labels.append(r'$' + str(i) + '$')
 xticks(xy_range, x_tick_labels)
 yticks(xy_range, y_tick_labels)
-
-# legend
-legend(loc='upper left')
 
 for label in ax.get_xticklabels() + ax.get_yticklabels():
   label.set_fontsize(9)
