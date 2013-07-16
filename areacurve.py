@@ -7,7 +7,7 @@ stop = 9
 samples = 22
 poly_data = []
 poly_list = []
-
+area_text = None
 
 # makes area poly
 def mkpolys(xa, xb, number_of_panels):
@@ -86,6 +86,7 @@ class DiscreteSlider(Slider):
 
 def update(val, s=None):
   global poly_data
+  global area_text
   if poly_data:
     if len(poly_data) > 0:
       poly_list = poly_data[0]
@@ -97,6 +98,9 @@ def update(val, s=None):
   for poly_item in poly_list:
     ax.add_patch(poly_item)
   print total_area
+  if area_text is not None:
+    area_text.remove()
+  area_text = plt.text(2.0, 2.0, "Area: " + str(total_area))
   draw()
   return poly_data
 
@@ -175,7 +179,7 @@ plt.subplots_adjust(left=0.25, bottom=0.25)
 slider_min = 1
 slider_max = 100
 axcolor = 'white'
-panel_axis  = plt.axes([0.25, 0.15, 0.65, 0.03], axisbg=axcolor)
+panel_axis  = plt.axes([0.25, 0.05, 0.65, 0.03], axisbg=axcolor)
 s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='green', increment=1)
 #return s_panels
 #panels_slider = gui_setup()
