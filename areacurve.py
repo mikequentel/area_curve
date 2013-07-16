@@ -9,6 +9,8 @@ poly_list = []
 area_text = None
 exact_area = 0.0
 exact_area_text = None
+xa_text = None
+xb_text = None
 
 # makes area poly
 def mkpolys(xa, xb, number_of_panels):
@@ -83,6 +85,8 @@ def update(val, s=None):
   global poly_data
   global exact_area_text
   global area_text
+  global xa_text
+  global xb_text
   if poly_data:
     if len(poly_data) > 0:
       poly_list = poly_data[0]
@@ -94,10 +98,16 @@ def update(val, s=None):
   for poly_item in poly_list:
     ax.add_patch(poly_item)
   #print total_area
+  if xa_text is not None:
+    xa_text.remove()
+  if xb_text is not None:
+    xb_text.remove()
   if exact_area_text is not None:
     exact_area_text.remove()
   if area_text is not None:
     area_text.remove()
+  xa_text = plt.text(2.0, 5.0, "xa: " + str(xa))
+  xb_text = plt.text(12.5, 5.0, "xb: " + str(xb))
   exact_area_text = plt.text(2.0, 3.5, "Exact Area: " + str(exact_area))
   area_text = plt.text(2.0, 2.0, "Riemann Sum Area: " + str(total_area))
   draw()
