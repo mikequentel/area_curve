@@ -2,6 +2,10 @@
 from pylab import *
 xa = 1
 xb = 10
+start = 1
+stop = 9
+samples = 22
+
 
 # makes area poly
 def mkpolys(xa, xb, number_of_panels):
@@ -64,17 +68,21 @@ class DiscreteSlider(Slider):
     for cid, func in self.observers.iteritems():
       func(discrete_val)
       
-def gui_setup():
-  plt.subplots_adjust(left=0.25, bottom=0.25)
-  slider_min = 1
-  slider_max = 100
-  axcolor = 'white'
-  panel_axis  = plt.axes([0.25, 0.15, 0.65, 0.03], axisbg=axcolor)
-  s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='green', increment=1)
-  return s_panels
+#def gui_setup():
+#  plt.subplots_adjust(left=0.25, bottom=0.25)
+#  slider_min = 1
+#  slider_max = 100
+#  axcolor = 'white'
+#  panel_axis  = plt.axes([0.25, 0.15, 0.65, 0.03], axisbg=axcolor)
+#  s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='green', increment=1)
+#  return s_panels
 
 def update(val, s=None):
-#  poly_data = mkpolys(xa, xb, val)
+  poly_data = mkpolys(xa, xb, val)
+  poly_list = poly_data[0]
+  total_area = poly_data[1]
+  for poly_item in poly_list:
+    ax.add_patch(poly_item)
 #  poly_list = poly_data[0]
 #  total_area = poly_data[1]
 #  for poly_item in poly_list:
@@ -82,87 +90,97 @@ def update(val, s=None):
   draw()
 
 
+
 #################### END GUI COMPONENTS ########################################
 
-def main():
-  #gui_setup()
-  
-  # rendering area
-  #figure(figsize=(4,2.5), dpi=80)
-  #figure(figsize=(8,5), dpi=80)
-  figure(figsize=(18, 15), dpi=80)
-  
-  # display area to use; can be modified to accommodate more graphs
-  subplot(111)
-  
-  # range
-  #x = np.linspace(0, (2 * np.pi), 256,endpoint=True)
-  x = np.linspace(-10.0, 10.0, 256, endpoint=True)
-  
-  # tick spines
-  ax = gca()
-  ax.spines['right'].set_color('none')
-  ax.spines['top'].set_color('none')
-  ax.xaxis.set_ticks_position('bottom')
-  ax.spines['bottom'].set_position(('data', 0))
-  ax.yaxis.set_ticks_position('left')
-  ax.spines['left'].set_position(('data', 0))
-  
-  # x and y tick limits and labels
-  xy_range = range(-10, 11)
-  xlim(xy_range[0], xy_range[-1])
-  ylim(xy_range[0], xy_range[-1])
-  x_tick_labels = []
-  y_tick_labels = []
-  for i in xy_range:
-    x_tick_labels.append(r'$' + str(i) + '$')
-    y_tick_labels.append(r'$' + str(i) + '$')
-  xticks(xy_range, x_tick_labels)
-  yticks(xy_range, y_tick_labels)
-  
-  # legend
-  legend(loc='upper left')
-  
-  for label in ax.get_xticklabels() + ax.get_yticklabels():
-    label.set_fontsize(8)
-    label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.05))
-    
-  
-    
-  # Polys
-  start = 1
-  stop = 9
-  samples = 22
-  poly_data = mkpolys(start, stop, samples)
-  poly_list = poly_data[0]
-  total_area = poly_data[1]
-  for poly_item in poly_list:
-    ax.add_patch(poly_item)
-  print "Area: " + str(total_area)
-  area_label = "Area under f(x): " + str(total_area)
-  
-  # formula to graph
-  #func = 1/x
-  func_output = func(x)
-  func_label = area_label + "\nPanels: " + str(samples)
-  
-  # line styles and labels
-  plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
-  
-  # legend
-  legend(loc='upper left')
+#def main():
 
-  # gui controls
-  panels_slider = gui_setup()
-  panels_slider.on_changed(update)
-  panels_slider.set_val(samples)
+# rendering area
+figure(figsize=(4,2.5), dpi=80)
+#figure(figsize=(8,5), dpi=80)
+#figure(figsize=(18, 15), dpi=80)
 
-  # display
-  show()
+# display area to use; can be modified to accommodate more graphs
+subplot(111)
+
+# range
+#x = np.linspace(0, (2 * np.pi), 256,endpoint=True)
+x = np.linspace(-10.0, 10.0, 256, endpoint=True)
+
+# tick spines
+ax = gca()
+ax.spines['right'].set_color('none')
+ax.spines['top'].set_color('none')
+ax.xaxis.set_ticks_position('bottom')
+ax.spines['bottom'].set_position(('data', 0))
+ax.yaxis.set_ticks_position('left')
+ax.spines['left'].set_position(('data', 0))
+
+# x and y tick limits and labels
+xy_range = range(-10, 11)
+xlim(xy_range[0], xy_range[-1])
+ylim(xy_range[0], xy_range[-1])
+x_tick_labels = []
+y_tick_labels = []
+for i in xy_range:
+  x_tick_labels.append(r'$' + str(i) + '$')
+  y_tick_labels.append(r'$' + str(i) + '$')
+xticks(xy_range, x_tick_labels)
+yticks(xy_range, y_tick_labels)
+
+# legend
+legend(loc='upper left')
+
+for label in ax.get_xticklabels() + ax.get_yticklabels():
+  label.set_fontsize(8)
+  label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.05))
+  
+
+  
+# Polys
+
+poly_data = mkpolys(start, stop, samples)
+poly_list = poly_data[0]
+total_area = poly_data[1]
+for poly_item in poly_list:
+  ax.add_patch(poly_item)
+print "Area: " + str(total_area)
+area_label = "Area under f(x): " + str(total_area)
+
+# formula to graph
+#func = 1/x
+func_output = func(x)
+func_label = area_label + "\nPanels: " + str(samples)
+
+# line styles and labels
+plot(x, func_output, color="blue", linewidth=2.5, linestyle="-", label=func_label)
+
+# legend
+legend(loc='upper left')
+
+# gui controls
+plt.subplots_adjust(left=0.25, bottom=0.25)
+slider_min = 1
+slider_max = 100
+axcolor = 'white'
+panel_axis  = plt.axes([0.25, 0.15, 0.65, 0.03], axisbg=axcolor)
+s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='green', increment=1)
+#return s_panels
+#panels_slider = gui_setup()
+#panels_slider.on_changed(update)
+#panels_slider.set_val(samples)
+
+s_panels.on_changed(update)
+s_panels.set_val(samples)
+
+
+
+# display
+show()
   
   
   
-# Specifies name of main function.
-if __name__ == "__main__":
-  sys.exit(main())
+## Specifies name of main function.
+#if __name__ == "__main__":
+#  sys.exit(main())
     
