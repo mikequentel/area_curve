@@ -133,7 +133,7 @@ def update(val, s=None):
   if panel_width_text is not None:
     panel_width_text.remove()
   
-  exact_area_text = plt.text(2.0, 5.5, "Exact Area: " + str(exact_area))
+  exact_area_text = plt.text(2.0, 5.5, "Exact Area: " + str(exact_area), backgroundcolor='white')
   rect_area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(rect_total_area), color='r')
   trap_area_text = plt.text(55.0, 4.3, "Trap Sum Area: " + str(trap_total_area), color='b')
   xa_text = plt.text(2.0, 3.1, "xa: " + str(xa))
@@ -188,7 +188,7 @@ func_output = func(x)
 func_label = "func(x)"
 
 # line styles and labels
-plot(x, func_output, color="black", linewidth=2.5, linestyle="-", label=func_label)
+plot(x, func_output, color="black", linewidth=2.5, linestyle="-", antialiased=True, label=func_label)
 
 # legend
 legend(loc='upper left')
