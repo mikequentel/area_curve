@@ -47,22 +47,10 @@ def mkpolys(xa, xb, number_of_panels):
   
   return poly_data
 
-def func_x_squared(input_x):
-  y = 0.05 * input_x ** 2
-  return y
-
-def func_x_minus_constants_plus_2(input_x):
-  y = (input_x - 3) * (input_x - 5) * (input_x - 7) + 2
-  return y
-
-def func_x_cubed(input_x):
-  y = 0.01 * (input_x * input_x * input_x) + 2
-  return y
-
 def func(input_x):
-  #y = func_x_squared(input_x)
-  y = func_x_minus_constants_plus_2(input_x)
-  #y = func_x_cubed(input_x)
+  #y = 0.05 * input_x ** 2
+  y = (input_x - 3) * (input_x - 5) * (input_x - 7) + 2
+  #y = 0.01 * (input_x * input_x * input_x) + 2
   return y
 
 #################### START GUI CONTROLS ######################################
