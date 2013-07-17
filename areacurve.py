@@ -3,7 +3,7 @@ from scipy import integrate
 from pylab import *
 xa = 1
 xb = 10
-samples = 22
+samples = 9
 poly_data = []
 poly_list = []
 area_text = None
@@ -11,10 +11,13 @@ exact_area = 0.0
 exact_area_text = None
 xa_text = None
 xb_text = None
+panel_width = 0.0
+panel_width_text = None
 
 # makes area poly
 def mkpolys(xa, xb, number_of_panels):
   global exact_area
+  global panel_width
   # area poly range
   poly_range_dist = (xb - xa) * 1.0
   panel_width = poly_range_dist / number_of_panels
@@ -87,6 +90,7 @@ def update(val, s=None):
   global area_text
   global xa_text
   global xb_text
+  global panel_width_text
   if poly_data:
     if len(poly_data) > 0:
       poly_list = poly_data[0]
@@ -106,10 +110,14 @@ def update(val, s=None):
     exact_area_text.remove()
   if area_text is not None:
     area_text.remove()
-  xa_text = plt.text(2.0, 5.0, "xa: " + str(xa))
-  xb_text = plt.text(12.5, 5.0, "xb: " + str(xb))
-  exact_area_text = plt.text(2.0, 3.5, "Exact Area: " + str(exact_area))
-  area_text = plt.text(2.0, 2.0, "Riemann Sum Area: " + str(total_area))
+  if panel_width_text is not None:
+    panel_width_text.remove()
+  
+  exact_area_text = plt.text(2.0, 5.5, "Exact Area: " + str(exact_area))
+  area_text = plt.text(2.0, 4.3, "Riemann Sum Area: " + str(total_area))
+  xa_text = plt.text(2.0, 2.8, "xa: " + str(xa))
+  xb_text = plt.text(12.5, 2.8, "xb: " + str(xb))
+  panel_width_text = plt.text(2.0, 1.5, "Panel Width: " + str(panel_width))
   draw()
   return poly_data
 
