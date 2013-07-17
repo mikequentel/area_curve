@@ -5,7 +5,6 @@ xa = 1
 xb = 10
 samples = 9
 poly_data = []
-#poly_list = []
 area_text = None
 exact_area = 0.0
 exact_area_text = None
@@ -22,20 +21,28 @@ def mkpolys(xa, xb, number_of_panels):
   poly_range_dist = (xb - xa) * 1.0
   panel_width = poly_range_dist / number_of_panels
   half_panel = panel_width / 2.0
-  poly_list = []
-  area = 0.0
+  #poly_list = []
+  rect_list = []
+  trap_list = []
+  #area = 0.0
+  rect_area = 0.0
   poly_data = []
   exact_area = integrate.quad(lambda x: func(x), xa, xb)[0]
 
   for i in np.arange(xa, xb, panel_width):
     panel_midpoint = i + half_panel
     panel_height = func(panel_midpoint)
-    poly = Rectangle((i, 0), panel_width, panel_height, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
-    poly_list.append(poly)
-    area += (panel_width * panel_height)
+#    poly = Rectangle((i, 0), panel_width, panel_height, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
+#    poly_list.append(poly)
+    rect = Rectangle((i, 0), panel_width, panel_height, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
+    rect_list.append(rect)
+    #area += (panel_width * panel_height)
+    rect_area += (panel_width * panel_height)
   
-  poly_data.append(poly_list)
-  poly_data.append(area)
+#  poly_data.append(poly_list)
+#  poly_data.append(area)
+  poly_data.append(rect_list)
+  poly_data.append(rect_area)
   return poly_data
 
 def func(input_x):
