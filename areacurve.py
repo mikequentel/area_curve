@@ -44,8 +44,9 @@ def init(samples):
   poly_data = mkpolys(xa, xb, samples)
 
 def func(input_x):
-  y = 0.05 * input_x ** 2
-  #y = (input_x - 3) * (input_x - 5) * (input_x - 7) + 85
+  #y = 0.05 * input_x ** 2
+  y = (input_x - 3) * (input_x - 5) * (input_x - 7) + 2
+  #y = 0.01 * (input_x * input_x * input_x) + 2
   return y
 
 #################### START GUI CONTROLS ######################################
