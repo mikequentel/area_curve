@@ -134,8 +134,8 @@ def update(val, s=None):
     panel_width_text.remove()
   
   exact_area_text = plt.text(2.0, 5.5, "Exact Area: " + str(exact_area))
-  rect_area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(rect_total_area))
-  trap_area_text = plt.text(55.0, 4.3, "Trap Sum Area: " + str(trap_total_area))
+  rect_area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(rect_total_area), color='r')
+  trap_area_text = plt.text(55.0, 4.3, "Trap Sum Area: " + str(trap_total_area), color='b')
   xa_text = plt.text(2.0, 3.1, "xa: " + str(xa))
   xb_text = plt.text(12.5, 3.1, "xb: " + str(xb))
   panel_width_text = plt.text(2.0, 1.5, "Panel Width: " + str(panel_width))
