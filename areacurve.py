@@ -5,7 +5,7 @@ xa = 1
 xb = 10
 samples = 9
 poly_data = []
-area_text = None
+rect_area_text = None
 exact_area = 0.0
 exact_area_text = None
 xa_text = None
@@ -100,7 +100,7 @@ class DiscreteSlider(Slider):
 def update(val, s=None):
   global poly_data
   global exact_area_text
-  global area_text
+  global rect_area_text
   global xa_text
   global xb_text
   global panel_width_text
@@ -123,13 +123,13 @@ def update(val, s=None):
     xb_text.remove()
   if exact_area_text is not None:
     exact_area_text.remove()
-  if area_text is not None:
-    area_text.remove()
+  if rect_area_text is not None:
+    rect_area_text.remove()
   if panel_width_text is not None:
     panel_width_text.remove()
   
   exact_area_text = plt.text(2.0, 5.5, "Exact Area: " + str(exact_area))
-  area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(total_area))
+  rect_area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(total_area))
   xa_text = plt.text(2.0, 2.8, "xa: " + str(xa))
   xb_text = plt.text(12.5, 2.8, "xb: " + str(xb))
   panel_width_text = plt.text(2.0, 1.5, "Panel Width: " + str(panel_width))
