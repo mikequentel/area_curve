@@ -38,11 +38,6 @@ def mkpolys(xa, xb, number_of_panels):
   poly_data.append(area)
   return poly_data
 
-def init(samples):
-  global poly_data
-  #poly_data = mkpolys(start, stop, samples)
-  poly_data = mkpolys(xa, xb, samples)
-
 def func(input_x):
   #y = 0.05 * input_x ** 2
   y = (input_x - 3) * (input_x - 5) * (input_x - 7) + 2
