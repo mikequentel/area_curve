@@ -31,6 +31,9 @@ def mkpolys(xa, xb, number_of_panels):
 
   for i in np.arange(xa, xb, panel_width):
     panel_midpoint = i + half_panel
+    panel_right = i + panel_width
+    panel_left_height = func(i)
+    panel_right_height = func(i + panel_width)
     panel_height = func(panel_midpoint)
 #    poly = Rectangle((i, 0), panel_width, panel_height, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
 #    poly_list.append(poly)
@@ -38,6 +41,7 @@ def mkpolys(xa, xb, number_of_panels):
     rect_list.append(rect)
     #area += (panel_width * panel_height)
     rect_area += (panel_width * panel_height)
+    trap = Polygon([[i, 0], [panel_right, 0], [panel_right, panel_right_height], [i, panel_left_height]], closed=True, edgecolor='g', facecolor='g', alpha='0.5', linewidth='2')
   
 #  poly_data.append(poly_list)
 #  poly_data.append(area)
@@ -117,7 +121,7 @@ def update(val, s=None):
     panel_width_text.remove()
   
   exact_area_text = plt.text(2.0, 5.5, "Exact Area: " + str(exact_area))
-  area_text = plt.text(2.0, 4.3, "Riemann Sum Area: " + str(total_area))
+  area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(total_area))
   xa_text = plt.text(2.0, 2.8, "xa: " + str(xa))
   xb_text = plt.text(12.5, 2.8, "xb: " + str(xb))
   panel_width_text = plt.text(2.0, 1.5, "Panel Width: " + str(panel_width))
