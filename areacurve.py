@@ -6,6 +6,7 @@ xb = 10
 samples = 9
 poly_data = []
 rect_area_text = None
+trap_area_text = None
 exact_area = 0.0
 exact_area_text = None
 xa_text = None
@@ -101,6 +102,7 @@ def update(val, s=None):
   global poly_data
   global exact_area_text
   global rect_area_text
+  global trap_area_text
   global xa_text
   global xb_text
   global panel_width_text
@@ -111,12 +113,12 @@ def update(val, s=None):
         poly_item.remove()
   poly_data = mkpolys(xa, xb, val)
 #  poly_list = poly_data[0]
-#  total_area = poly_data[1]
+#  rect_total_area = poly_data[1]
   poly_list = poly_data[0]
-  total_area = poly_data[1]
+  rect_total_area = poly_data[1]
   for poly_item in poly_list:
     ax.add_patch(poly_item)
-  #print total_area
+  #print rect_total_area
   if xa_text is not None:
     xa_text.remove()
   if xb_text is not None:
@@ -125,11 +127,14 @@ def update(val, s=None):
     exact_area_text.remove()
   if rect_area_text is not None:
     rect_area_text.remove()
+  if trap_area_text is not None:
+    trap_area_text.remove()
   if panel_width_text is not None:
     panel_width_text.remove()
   
   exact_area_text = plt.text(2.0, 5.5, "Exact Area: " + str(exact_area))
-  rect_area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(total_area))
+  rect_area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(rect_total_area))
+  trap_area_text = plt.text(4.0, 4.3, "Trap Sum Area: " + str(rect_total_area))
   xa_text = plt.text(2.0, 2.8, "xa: " + str(xa))
   xb_text = plt.text(12.5, 2.8, "xb: " + str(xb))
   panel_width_text = plt.text(2.0, 1.5, "Panel Width: " + str(panel_width))
