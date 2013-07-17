@@ -47,7 +47,7 @@ def mkpolys(xa, xb, number_of_panels):
     trap = Polygon([[i, 0], [panel_right, 0], [panel_right, panel_right_height], [i, panel_left_height]], closed=True, edgecolor='b', facecolor='b', alpha='0.5', linewidth='2')
     #trap_list.append(trap)
     poly_list.append(trap)
-    trap_area += ((1/2) * panel_width * (panel_left_height + panel_right_height))
+    trap_area += (0.5 * panel_width * (panel_left_height + panel_right_height))
   poly_data.append(poly_list)
 #  poly_data.append(area)
   #poly_data.append(rect_list)
@@ -116,6 +116,7 @@ def update(val, s=None):
 #  rect_total_area = poly_data[1]
   poly_list = poly_data[0]
   rect_total_area = poly_data[1]
+  trap_total_area = poly_data[2]
   for poly_item in poly_list:
     ax.add_patch(poly_item)
   #print rect_total_area
@@ -134,9 +135,9 @@ def update(val, s=None):
   
   exact_area_text = plt.text(2.0, 5.5, "Exact Area: " + str(exact_area))
   rect_area_text = plt.text(2.0, 4.3, "Mid Sum Area: " + str(rect_total_area))
-  trap_area_text = plt.text(4.0, 4.3, "Trap Sum Area: " + str(rect_total_area))
-  xa_text = plt.text(2.0, 2.8, "xa: " + str(xa))
-  xb_text = plt.text(12.5, 2.8, "xb: " + str(xb))
+  trap_area_text = plt.text(55.0, 4.3, "Trap Sum Area: " + str(trap_total_area))
+  xa_text = plt.text(2.0, 3.1, "xa: " + str(xa))
+  xb_text = plt.text(12.5, 3.1, "xb: " + str(xb))
   panel_width_text = plt.text(2.0, 1.5, "Panel Width: " + str(panel_width))
   draw()
   return poly_data
