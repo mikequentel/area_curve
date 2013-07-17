@@ -182,5 +182,10 @@ s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slide
 s_panels.on_changed(update)
 s_panels.set_val(samples)
 
+# title
+win_title = "Area Under Curve"
+fig = gcf()
+fig.canvas.set_window_title(win_title)
+
 # display
 show()
