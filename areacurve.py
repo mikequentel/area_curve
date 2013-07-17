@@ -178,7 +178,7 @@ slider_min = 1
 slider_max = 100
 axcolor = 'white'
 panel_axis  = plt.axes([0.25, 0.05, 0.65, 0.03], axisbg=axcolor)
-s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='green', increment=1)
+s_panels = DiscreteSlider(panel_axis, 'Panels', valinit=slider_min, valmin=slider_min, valmax=slider_max, valfmt='%3.0f', facecolor='grey', increment=1)
 s_panels.on_changed(update)
 s_panels.set_val(samples)
 
