@@ -26,6 +26,7 @@ def mkpolys(xa, xb, number_of_panels):
   trap_list = []
   #area = 0.0
   rect_area = 0.0
+  trap_area = 0.0
   poly_data = []
   exact_area = integrate.quad(lambda x: func(x), xa, xb)[0]
 
@@ -42,7 +43,8 @@ def mkpolys(xa, xb, number_of_panels):
     #area += (panel_width * panel_height)
     rect_area += (panel_width * panel_height)
     trap = Polygon([[i, 0], [panel_right, 0], [panel_right, panel_right_height], [i, panel_left_height]], closed=True, edgecolor='g', facecolor='g', alpha='0.5', linewidth='2')
-  
+    trap_list.append(trap)
+    trap_area += ((1/2) * panel_width * (panel_left_height + panel_right_height))
 #  poly_data.append(poly_list)
 #  poly_data.append(area)
   poly_data.append(rect_list)
