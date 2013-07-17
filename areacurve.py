@@ -23,9 +23,6 @@ def mkpolys(xa, xb, number_of_panels):
   panel_width = poly_range_dist / number_of_panels
   half_panel = panel_width / 2.0
   poly_list = []
-  #rect_list = []
-  #trap_list = []
-  #area = 0.0
   rect_area = 0.0
   trap_area = 0.0
   poly_data = []
@@ -37,23 +34,17 @@ def mkpolys(xa, xb, number_of_panels):
     panel_left_height = func(i)
     panel_right_height = func(i + panel_width)
     panel_height = func(panel_midpoint)
-#    poly = Rectangle((i, 0), panel_width, panel_height, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
-#    poly_list.append(poly)
     rect = Rectangle((i, 0), panel_width, panel_height, edgecolor='r', facecolor='r', alpha='0.5', linewidth='2')
-    #rect_list.append(rect)
     poly_list.append(rect)
-    #area += (panel_width * panel_height)
     rect_area += (panel_width * panel_height)
     trap = Polygon([[i, 0], [panel_right, 0], [panel_right, panel_right_height], [i, panel_left_height]], closed=True, edgecolor='b', facecolor='b', alpha='0.5', linewidth='2')
-    #trap_list.append(trap)
     poly_list.append(trap)
     trap_area += (0.5 * panel_width * (panel_left_height + panel_right_height))
+    
   poly_data.append(poly_list)
-#  poly_data.append(area)
-  #poly_data.append(rect_list)
   poly_data.append(rect_area)
-  #poly_data.append(trap_list)
   poly_data.append(trap_area)
+  
   return poly_data
 
 def func(input_x):
@@ -112,14 +103,13 @@ def update(val, s=None):
       for poly_item in poly_list:
         poly_item.remove()
   poly_data = mkpolys(xa, xb, val)
-#  poly_list = poly_data[0]
-#  rect_total_area = poly_data[1]
   poly_list = poly_data[0]
   rect_total_area = poly_data[1]
   trap_total_area = poly_data[2]
+  
   for poly_item in poly_list:
     ax.add_patch(poly_item)
-  #print rect_total_area
+
   if xa_text is not None:
     xa_text.remove()
   if xb_text is not None:
@@ -182,9 +172,7 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
 poly_data = update(samples)
 
 # formula to graph
-#func = 1/x
 func_output = func(x)
-#func_label = area_label + "\nPanels: " + str(samples)
 func_label = "func(x)"
 
 # line styles and labels
